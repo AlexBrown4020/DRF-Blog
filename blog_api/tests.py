@@ -4,3 +4,7 @@ from rest_framework.test import APITestCase
 from blog.models import Post, Category
 from django.contrib.auth.models import User
 
+class PostTests(APITestCase):
+    def test_view_posts(self):
+        url = reverse('blog_api:listcreate')
+        response = self.client.get(url, format='json')
