@@ -8,6 +8,8 @@ WORKDIR /DRF
 
 RUN ls .
 
+RUN pip freeze > requirements.txt
+
 RUN pip install -r requirements.txt
 
 VOLUME /DRF
