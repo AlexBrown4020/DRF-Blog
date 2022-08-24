@@ -1,10 +1,16 @@
 FROM python:3.9.5
 
 ENV PYTHONUNBUFFERED 1
-# RUN git clone https://github.com/AlexBrown4020/DRF-Blog.git /DRF
+ENV PYTHONDONTWRITEBYTECODE 1
+
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
+RUN pip install --upgrade pip 
+COPY requirements.txt /usr/src/app
+RUN pip install -r /usr/src/app/requirements.txt
+
+COPY . /usr/src/app
+
 EXPOSE 8000
-RUN mkdir /DRF
-WORKDIR /DRF
-COPY . /DRF/
-RUN pip install -r requirements.txt
-#public.ecr.aws/t8h9x3i2/drf-api-blog-repo3:latest
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
